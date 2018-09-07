@@ -1,0 +1,11 @@
+<p>Search a Zip Code Below!</p>
+
+<div id="search-component">
+  <input #searchBox id="search-box" [(ngModel)]="code" placeholder="Zip Code"/>
+  
+  <div *ngIf="code.length==5">
+    <p>Click below to find data for {{code}}.</p>
+    <button (click)="getZipCodeData(code)">Search!</button>
+    <p>{{data.zipCode}}</p>
+  </div>
+</div>
