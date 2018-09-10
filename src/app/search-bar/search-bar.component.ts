@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ZipCodeDataService } from '../zip-code-data.service';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-search-bar',
@@ -29,12 +30,20 @@ export class SearchBarComponent implements OnInit {
   }
 
   getZipCodeData(code) {
-    this.zipService.getZipCodeData(code)
-    .subscribe(data => {
-      this.data = data;
-      console.log(data),
-      error => this.errorMessage = <any>error
-    });
+    if (code.length == 5){
+      this.zipService.getZipCodeData(code)
+      .subscribe(data => {
+        this.data = data;
+        console.log(data),
+        error => this.errorMessage = <any>error
+      });
+    }
+  }
+
+  enterSearch(event, code){
+    if(event.keyCode == 13 && code.length == 5 ){
+      this.getZipCodeData(code);
+    }
   }
 
 }
