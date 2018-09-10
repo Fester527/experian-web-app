@@ -1,7 +1,6 @@
-<p>Search a Zip Code Below!</p>
-
-<div id="search-component">
-  <input myNumberOnly #searchBox id="search-box" [(ngModel)]="code" placeholder="Enter a zip code." (keydown)="enterSearch($event, code)"/>
+<div id="search-component" style="text-align:center">
+  <p>Search a Zip Code Below!</p>
+  <input myNumberOnly #searchBox id="search-box" [(ngModel)]="code" placeholder="Enter a zip code." (keydown)="enterSearch($event, code)" style="height: 35px;"/>
   
   <div *ngIf="searchBar(code)">
     <p>Click below to find data for {{code}}.</p>

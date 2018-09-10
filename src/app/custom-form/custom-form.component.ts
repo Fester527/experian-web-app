@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormTemplate } from '../custom-form-template';
 
 @Component({
   selector: 'app-custom-form',
@@ -11,5 +12,17 @@ export class CustomFormComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  model = new FormTemplate('', '', '');
+
+  submitted = false;
+
+  onSubmit() { this.submitted = true }
+
+  newForm() {
+    this.model = new FormTemplate('','','');
+  }
+
+  get diagnostic() { return JSON.stringify(this.model) }
 
 }

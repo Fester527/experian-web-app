@@ -4,15 +4,16 @@ import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+import { NumberOnlyDirective } from './number.directive';
 import { AppComponent } from './app.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
-import { NumberOnlyDirective } from './number.directive';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 
 //---------------------------Routes
 const appRoutes: Routes = [
   {path: '', redirectTo: '/search', pathMatch: 'full'},
-  {path: 'search', component: SearchBarComponent}
+  {path: 'search', component: SearchBarComponent},
+  {path: 'custom-form', component: CustomFormComponent}
 ]
 
 @NgModule({

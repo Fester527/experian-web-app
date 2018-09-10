@@ -1,5 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>{{ title }}</h1>
-  <router-outlet></router-outlet>
+  <nav>
+    <a routerLink="/search">Search Page</a>
+    <a routerLink="/custom-form">Custom Form</a>
+  </nav>
 </div>
+<hr>
+<router-outlet></router-outlet>
