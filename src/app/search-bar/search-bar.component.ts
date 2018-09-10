@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ZipCodeDataService } from '../zip-code-data.service';
-import { delay } from 'q';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,37 +12,49 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private zipService: ZipCodeDataService) { }
 
-  private code: number = undefined;
+  public code: number;
   public data: any = [];
   public errorMessage: string;
+  public loading = false;
 
-  ngOnInit() {
+  ngOnInit() { }
 
-  }
-
-  searchBar(code): boolean{
-    if(code.length == 5) return true;
-    else {
-      this.data = [];
-      return false;
+  getZipCodeData(search) {
+    if (search && search.length == 5){
+      this.loading = true;
+      this.zipService.getZipCodeData(search)
+        .subscribe(
+          data => {
+            this.data = data; 
+            this.loading = false; 
+            console.log(data);
+          },
+          error => {
+            this.errorMessage = <any>error;
+            this.loading = false;
+          },
+          () => {
+            if(this.data == null) alert('No data was found.');
+            if(this.data != null) alert(
+              "Married: " + this.data.maritalStatus.married +
+              "\nSingle: " + this.data.maritalStatus.single +
+              "\nUnknown: " + this.data.maritalStatus.unknown
+            );
+          }
+        );
+      this.loading = false;
+    }
+    else{
+      alert('Please eneter a valid five digit zip code.');
     }
   }
 
-  getZipCodeData(code) {
-    if (code.length == 5){
-      this.zipService.getZipCodeData(code)
-      .subscribe(data => {
-        this.data = data;
-        console.log(data),
-        error => this.errorMessage = <any>error
-      });
+  enterSearch(event, search){
+    if(event.keyCode == 13 && search.length == 5) {
+      this.getZipCodeData(search);
     }
-  }
-
-  enterSearch(event, code){
-    if(event.keyCode == 13 && code.length == 5 ){
-      this.getZipCodeData(code);
-    }
+    if(search && search.length != 5) this.data = [];
+    if(event.keyCode == 13 && !search) alert('Please eneter a valid five digit zip code.');
   }
 
 }

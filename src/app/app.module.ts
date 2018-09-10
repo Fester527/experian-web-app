@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { LoadingModule } from 'ngx-loading';
 
 import { NumberOnlyDirective } from './number.directive';
 import { AppComponent } from './app.component';
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: true}
-    )
+    ),
+    LoadingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

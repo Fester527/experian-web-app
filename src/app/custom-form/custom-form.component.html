@@ -1,7 +1,86 @@
 <div class="container">
   <div class="row">
-    <div class="border border-dark col-lg-6 offset-lg-3">
-      <p>Form goes here.</p>
+    <div class="col-lg-6 offset-lg-3">
+
+      <!--Form goes below.-->
+      <div class="container">
+        <div [hidden]="submitted">
+          <h1>Custom Form</h1>
+          <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
+              <div [hidden]="name.valid || name.pristine" class="alert alert-danger"> Name is required </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel">
+              <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required </div>
+            </div>
+
+            <div class="form-group">
+              <label for="mobile">Phone Number</label>
+              <input type="tel" class="form-control" id="mobile" required [(ngModel)]="model.mobile" name="mobile" #mobile="ngModel">
+              <div [hidden]="mobile.valid || mobile.pristine" class="alert alert-danger"> Phone number is required </div>
+            </div>
+
+            <div class="form-group">
+              <label for="zipcode">Zip Code</label>
+              <input type="number" class="form-control" id="zipcode" required [(ngModel)]="model.zipcode" name="zipcode" #zipcode="ngModel">
+              <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger"> Zip code is required </div>
+            </div>
+
+            <fieldset>
+              <legend>Select a housing type.</legend>
+
+              <div>
+                  <input type="radio" id="singleFamily" name="drone" checked (singleFamily)="model.singleFamily"/>
+                  <label for="singleFamily">Single Family</label>
+              </div>
+
+              <div>
+                  <input type="radio" id="multiFamily" name="drone" (multiFamily)="model.multiFamily"/>
+                  <label for="multiFamily">Multi Family</label>
+              </div>
+
+              <div>
+                  <input type="radio" id="poBox" name="drone" (poBox)="model.poBox"/>
+                  <label for="poBox">PO Box</label>
+              </div>
+
+            </fieldset>
+
+            <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
+            <button type="button" class="btn btn-default" (click)="newForm(); myForm.reset()">New Form</button>
+          </form>
+        </div>
+
+        <!--Submitted Form-->
+        <div [hidden]="!submitted">
+          <h2>You submitted the following:</h2>
+          <div class="row">
+            <div class="col-xs-3">Name:</div>
+            <div class="col-xs-9  pull-right">{{ model.name }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Email:</div>
+            <div class="col-xs-9 pull-right">{{ model.email }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Phone number:</div>
+            <div class="col-xs-9 pull-right">{{ model.mobile }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Zip Code:</div>
+            <div class="col-xs-9 pull-right">{{ model.zipcode }}</div>
+          </div>
+          <br>
+          <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

@@ -13,14 +13,17 @@ export class CustomFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  model = new FormTemplate('', '', '');
+  model = new FormTemplate('', '', '', null, false, false, false);
 
   submitted = false;
 
-  onSubmit() { this.submitted = true }
+  onSubmit() { 
+    this.submitted = true;
+    console.log(JSON.stringify(this.model));
+  }
 
   newForm() {
-    this.model = new FormTemplate('','','');
+    this.model = new FormTemplate('','','', null, false, false, false);
   }
 
   get diagnostic() { return JSON.stringify(this.model) }
