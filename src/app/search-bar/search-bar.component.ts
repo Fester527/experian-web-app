@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ZipCodeDataService } from '../zip-code-data.service';
-import { ZipCodeData } from '../ZipCodeData';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,18 +12,29 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private zipService: ZipCodeDataService) { }
 
-  private code;
-  data: ZipCodeData;
-
-  getZipCodeData(code: string): Observable<ZipCodeData> {
-    return this.zipService.getZipCodeData(code)
-    .subscribe((data: ZipCodeData) => this.data = {
-      zipCode: data['zipCode']
-    });
-  }
+  private code: number = undefined;
+  public data: any = [];
+  public errorMessage: string;
 
   ngOnInit() {
 
+  }
+
+  searchBar(code): boolean{
+    if(code.length == 5) return true;
+    else {
+      this.data = [];
+      return false;
+    }
+  }
+
+  getZipCodeData(code) {
+    this.zipService.getZipCodeData(code)
+    .subscribe(data => {
+      this.data = data;
+      console.log(data),
+      error => this.errorMessage = <any>error
+    });
   }
 
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ZipCodeData } from './ZipCodeData';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -13,9 +12,9 @@ export class ZipCodeDataService {
 
   private zipCodeSearchUrl = 'https://experian-api.herokuapp.com/search';
 
-  getZipCodeData (code: string): Observable<ZipCodeData> {
+  getZipCodeData (code: string): Observable<String[]> {
     const url = `${this.zipCodeSearchUrl}/${code}`;
-    return this.http.get<ZipCodeData>(url)
+    return this.http.get<String[]>(url)
     .pipe(
       retry(3),
       catchError(this.handleError)

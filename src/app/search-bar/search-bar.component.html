@@ -1,11 +1,20 @@
 <p>Search a Zip Code Below!</p>
 
 <div id="search-component">
-  <input #searchBox id="search-box" [(ngModel)]="code" placeholder="Zip Code"/>
+  <input myNumberOnly #searchBox id="search-box" [(ngModel)]="code" placeholder="Enter a zip code."/>
   
-  <div *ngIf="code.length==5">
+  <div *ngIf="searchBar(code)">
     <p>Click below to find data for {{code}}.</p>
     <button (click)="getZipCodeData(code)">Search!</button>
-    <p>{{data.zipCode}}</p>
+    <div *ngIf="data.length!=0">
+      <p>{{data.zipCode}}</p>
+      <h3>Marital Status</h3>
+      <p>Married: {{data.maritalStatus.married}}</p>
+      <p>Single: {{data.maritalStatus.single}}</p>
+      <p>Unknown: {{data.maritalStatus.unknown}}</p>
+    </div>
+  </div>
+  <div *ngIf="data == null">
+    <h2>No data can be found for this zip code: {{code}}</h2>
   </div>
 </div>
