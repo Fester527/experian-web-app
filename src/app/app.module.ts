@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NumberOnlyDirective } from './number.directive';
+import { CustomFormComponent } from './custom-form/custom-form.component';
 
 //---------------------------Routes
 const appRoutes: Routes = [
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     SearchBarComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    CustomFormComponent
   ],
   imports: [
     BrowserModule,
