@@ -2,10 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NumberOnlyDirective } from './number.directive';
+
+//---------------------------Routes
+const appRoutes: Routes = [
+  {path: '', redirectTo: '/search', pathMatch: 'full'},
+  {path: 'search', component: SearchBarComponent}
+]
 
 @NgModule({
   declarations: [
@@ -16,7 +23,11 @@ import { NumberOnlyDirective } from './number.directive';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      {enableTracing: true}
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
