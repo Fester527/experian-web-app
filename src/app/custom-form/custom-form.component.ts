@@ -13,7 +13,7 @@ export class CustomFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  model = new FormTemplate('', '', '', null, false, false, false);
+  model = new FormTemplate('Ness Earthbound', 'snes@nintendo.com', '18885552727', 30605, 'Single Family', null, null);
 
   submitted = false;
 
@@ -23,7 +23,7 @@ export class CustomFormComponent implements OnInit {
   }
 
   newForm() {
-    this.model = new FormTemplate('','','', null, false, false, false);
+    this.model = new FormTemplate('','','', null, '', null, null);
   }
 
   get diagnostic() { return JSON.stringify(this.model) }

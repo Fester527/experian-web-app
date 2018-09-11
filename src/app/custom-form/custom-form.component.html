@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-8 offset-lg-2">
 
       <!--Form goes below.-->
       <div class="container">
@@ -38,24 +38,40 @@
 
             <!--Housing Type-->
             <fieldset>
-              <legend>Select a housing type.</legend>
+              <legend>Select a housing type:</legend>
 
               <div>
-                <input type="radio" id="singleFamily" name="drone" checked (singleFamily)="model.singleFamily"/>
+                <input type="radio" id="singleFamily" name="singleFamily" value="Single Family" [(ngModel)]="model.housing" #singleFamily="ngModel" checked/>
                 <label for="singleFamily">Single Family</label>
               </div>
 
               <div>
-                <input type="radio" id="multiFamily" name="drone" (multiFamily)="model.multiFamily"/>
+                <input type="radio" id="multiFamily" name="multiFamily" value="Multi Family" [(ngModel)]="model.housing" #multiFamily="ngModel"/>
                 <label for="multiFamily">Multi Family</label>
               </div>
 
               <div>
-                <input type="radio" id="poBox" name="drone" (poBox)="model.poBox"/>
+                <input type="radio" id="poBox" name="poBox" value="PO Box" [(ngModel)]="model.housing" #poBox="ngModel"/>
                 <label for="poBox">PO Box</label>
               </div>
-
             </fieldset>
+
+            <!--Date Selection-->
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" type="date" class="form-control" name="start" id="start" [(ngModel)]="model.startDate" #start="ngModel">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="picker2" placeholder="Choose a end date" type="date" class="form-control" name="end" id="end" [(ngModel)]="model.endDate" #end="ngModel">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
 
             <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
             <button type="button" class="btn btn-default" (click)="newForm(); myForm.reset()">New Form</button>
@@ -80,6 +96,10 @@
           <div class="row">
             <div class="col-xs-3">Zip Code:</div>
             <div class="col-xs-9 pull-right">{{ model.zipcode }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Housing Type:</div>
+            <div class="col-xs-9 pull-right">{{ model.housing }}</div>
           </div>
           <br>
           <button class="btn btn-primary" (click)="submitted=false">Edit</button>

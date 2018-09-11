@@ -4,8 +4,8 @@ export class FormTemplate{
         public email: string,
         public mobile: string,
         public zipcode: number,
-        public singleFamily: boolean,
-        public multiFamily: boolean,
-        public poBox: boolean
+        public housing: string,
+        public startDate: Date,
+        public endDate: Date
     ) {}
 }
