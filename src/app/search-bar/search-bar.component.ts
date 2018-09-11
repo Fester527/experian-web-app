@@ -42,7 +42,6 @@ export class SearchBarComponent implements OnInit {
             );
           }
         );
-      this.loading = false;
     }
     else{
       alert('Please eneter a valid five digit zip code.');

@@ -4,6 +4,8 @@ import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LoadingModule } from 'ngx-loading';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
 import { NumberOnlyDirective } from './number.directive';
 import { AppComponent } from './app.component';
@@ -32,7 +34,10 @@ const appRoutes: Routes = [
       appRoutes,
       {enableTracing: true}
     ),
-    LoadingModule
+    LoadingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
