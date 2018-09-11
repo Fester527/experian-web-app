@@ -1,20 +1,16 @@
 .ng-valid[required], .ng-valid.required  {
     border-left: 5px solid #42A948; /* green */
-  }
-  
-  .ng-invalid:not(form)  {
-    border-left: 5px solid #a94442; /* red */
-  }
-  .example-radio-group {
-    display: inline-flex;
-    flex-direction: column;
-  }
-  
-  .example-radio-button {
-    margin: 5px;
-  }
-  
-  .example-selected-value {
-    margin: 15px 0;
-  }
-  
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+.example-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+.example-radio-button {
+  margin: 5px;
+}
+.example-selected-value {
+  margin: 15px 0;
+}

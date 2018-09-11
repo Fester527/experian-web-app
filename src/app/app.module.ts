@@ -7,13 +7,13 @@ import { LoadingModule } from 'ngx-loading';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, 
         MatCheckboxModule, 
-        MatNativeDateModule, 
-        MatExpansionModule,
+        MatNativeDateModule,
         MatRadioModule
        } from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import { MatInputModule} from '@angular/material';
 
 import { NumberOnlyDirective } from './number.directive';
 import { AppComponent } from './app.component';

@@ -13,6 +13,8 @@ export class FormTemplate{
         public unknownStatus: boolean,
         public male: boolean,
         public female: boolean,
-        public unknownGender: boolean
+        public unknownGender: boolean,
+        public income: boolean[],
+        public age: boolean[]
     ) {}
 }
