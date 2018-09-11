@@ -8,9 +8,6 @@
             <mat-panel-title>
               Custom Form
             </mat-panel-title>
-            <mat-panel-description>
-              Click here to fill out a custom form.
-            </mat-panel-description>
           </mat-expansion-panel-header>
 
           <!--Content of expansion.-->
@@ -18,40 +15,43 @@
             <div class="row">
               <div class="col-md-10 offset-md-1">
                 <div [hidden]="submitted">
-                  <h1>Custom Form</h1>
+                  <h6>Below you can choose the options you would like for your custom report.</h6>
+                  <hr>
                   <form (ngSubmit)="onSubmit()" #myForm="ngForm">
 
                     <!--Name-->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="name">Name</label>
                       <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
                       <div [hidden]="name.valid || name.pristine" class="alert alert-danger"> Name is required </div>
-                    </div>
+                    </div> -->
 
                     <!--Email-->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="email">Email</label>
                       <input type="text" class="form-control" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel">
                       <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required </div>
-                    </div>
+                    </div> -->
 
                     <!--Phone-->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="mobile">Phone Number</label>
                       <input type="tel" class="form-control" id="mobile" required [(ngModel)]="model.mobile" name="mobile" #mobile="ngModel">
                       <div [hidden]="mobile.valid || mobile.pristine" class="alert alert-danger"> Phone number is required </div>
-                    </div>
+                    </div> -->
 
                     <!--Zip Code-->
                     <div class="form-group">
                       <label for="zipcode">Zip Code</label>
-                      <input type="number" class="form-control" id="zipcode" required [(ngModel)]="model.zipcode" name="zipcode" #zipcode="ngModel">
+                      <input type="number" class="form-control" id="zipcode"  [(ngModel)]="model.zipcode" name="zipcode" #zipcode="ngModel" required>
                       <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger"> Zip code is required </div>
                     </div>
 
+                    <hr>
+
                     <!--Housing Type-->
                     <fieldset>
-                      <legend>Select housing type:</legend>
+                      <legend>Select the housing types that apply:</legend>
 
                       <div>
                         <input type="checkbox" id="singleFamily" name="singleFamily" value="true" [(ngModel)]="model.singleFamily" #singleFamily="ngModel"/>
@@ -64,10 +64,12 @@
                       </div>
                     </fieldset>
 
+                    <hr>
+
                     <!--Start Date Selection-->
                     <div class="form-group">
                       <mat-form-field class="example-full-width">
-                        <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" type="date" class="form-control" name="start" id="start" [(ngModel)]="model.startDate" #start="ngModel">
+                        <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" class="form-control" name="start" id="start" [(ngModel)]="model.startDate" #start="ngModel" required>
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #picker1></mat-datepicker>
                       </mat-form-field>
@@ -76,15 +78,17 @@
                     <!--End Date Selection-->
                     <div class="form-group">
                       <mat-form-field class="example-full-width">
-                        <input matInput [matDatepicker]="picker2" placeholder="Choose an end date" type="date" class="form-control" name="end" id="end" [(ngModel)]="model.endDate" #end="ngModel">
+                        <input matInput [matDatepicker]="picker2" placeholder="Choose an end date" class="form-control" name="end" id="end" [(ngModel)]="model.endDate" #end="ngModel" required>
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #picker2></mat-datepicker>
                       </mat-form-field>
                     </div>
 
+                    <hr>
+
                     <!--Marital Status-->
                     <fieldset>
-                      <legend>Select marital status:</legend>
+                      <legend>Select the marital statuses that apply:</legend>
 
                       <div>
                         <input type="checkbox" id="married" name="married" value="true" [(ngModel)]="model.married" #married="ngModel"/>
@@ -102,9 +106,11 @@
                       </div>
                     </fieldset>
 
+                    <hr>
+
                     <!--Gender-->
                     <fieldset>
-                      <legend>Select gender:</legend>
+                      <legend>Select the genders that apply:</legend>
 
                       <div>
                         <input type="checkbox" id="male" name="male" value="true" [(ngModel)]="model.male" #male="ngModel"/>
@@ -122,9 +128,11 @@
                       </div>
                     </fieldset>
 
+                    <hr>
+
                     <!--Income-->
                     <fieldset>
-                      <legend>Select income range(s):</legend>
+                      <legend>Select the income ranges that apply:</legend>
 
                       <div>
                         <input type="checkbox" id="income1" name="income1" value="true" [(ngModel)]="model.income[0]" #income1="ngModel"/>
@@ -193,9 +201,11 @@
                       </div>
                     </fieldset>
 
+                    <hr>
+
                     <!--Age Ranges-->
                     <fieldset>
-                      <legend>Select income range(s):</legend>
+                      <legend>Select the age ranges that apply:</legend>
 
                       <div>
                         <input type="checkbox" id="age1" name="age1" value="true" [(ngModel)]="model.age[0]" #age1="ngModel"/>
@@ -222,6 +232,8 @@
                         <label for="age5">60+ years old</label>
                       </div>
                     </fieldset>
+                    
+                    <br>
 
                     <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
                     <button type="button" class="btn btn-default" (click)="newForm(); myForm.reset()">New Form</button>
@@ -239,7 +251,7 @@
           </div>
         </mat-expansion-panel>
       </mat-accordion>
-      
+
     </div>
   </div>
 </div>
