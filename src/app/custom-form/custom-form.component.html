@@ -38,25 +38,20 @@
 
             <!--Housing Type-->
             <fieldset>
-              <legend>Select a housing type:</legend>
+              <legend>Select housing type:</legend>
 
               <div>
-                <input type="radio" id="singleFamily" name="singleFamily" value="Single Family" [(ngModel)]="model.housing" #singleFamily="ngModel" checked/>
+                <input type="checkbox" id="singleFamily" name="singleFamily" value="true" [(ngModel)]="model.singleFamily" #singleFamily="ngModel"/>
                 <label for="singleFamily">Single Family</label>
               </div>
 
               <div>
-                <input type="radio" id="multiFamily" name="multiFamily" value="Multi Family" [(ngModel)]="model.housing" #multiFamily="ngModel"/>
+                <input type="checkbox" id="multiFamily" name="multiFamily" value="true" [(ngModel)]="model.multiFamily" #multiFamily="ngModel"/>
                 <label for="multiFamily">Multi Family</label>
-              </div>
-
-              <div>
-                <input type="radio" id="poBox" name="poBox" value="PO Box" [(ngModel)]="model.housing" #poBox="ngModel"/>
-                <label for="poBox">PO Box</label>
               </div>
             </fieldset>
 
-            <!--Date Selection-->
+            <!--Start Date Selection-->
             <div class="form-group">
               <mat-form-field class="example-full-width">
                 <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" type="date" class="form-control" name="start" id="start" [(ngModel)]="model.startDate" #start="ngModel">
@@ -65,6 +60,7 @@
               </mat-form-field>
             </div>
 
+            <!--End Date Selection-->
             <div class="form-group">
               <mat-form-field class="example-full-width">
                 <input matInput [matDatepicker]="picker2" placeholder="Choose a end date" type="date" class="form-control" name="end" id="end" [(ngModel)]="model.endDate" #end="ngModel">
@@ -72,6 +68,46 @@
                 <mat-datepicker touchUi #picker2></mat-datepicker>
               </mat-form-field>
             </div>
+
+            <!--Marital Status-->
+            <fieldset>
+              <legend>Select marital status:</legend>
+
+              <div>
+                <input type="checkbox" id="married" name="married" value="true" [(ngModel)]="model.married" #married="ngModel"/>
+                <label for="singleFamily">Married</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="single" name="single" value="true" [(ngModel)]="model.single" #single="ngModel"/>
+                <label for="multiFamily">Single</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="unknownStatus" name="unknownStatus" value="true" [(ngModel)]="model.unknownStatus" #unknownStatus="ngModel"/>
+                <label for="multiFamily">Unknown</label>
+              </div>
+            </fieldset>
+
+            <!--Gender-->
+            <fieldset>
+              <legend>Select gender:</legend>
+
+              <div>
+                <input type="checkbox" id="male" name="male" value="true" [(ngModel)]="model.male" #male="ngModel"/>
+                <label for="singleFamily">Male</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="female" name="female" value="true" [(ngModel)]="model.female" #female="ngModel"/>
+                <label for="multiFamily">Female</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="unknownGender" name="unknownGender" value="true" [(ngModel)]="model.unknownGender" #unknownGender="ngModel"/>
+                <label for="multiFamily">Unknown</label>
+              </div>
+            </fieldset>
 
             <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
             <button type="button" class="btn btn-default" (click)="newForm(); myForm.reset()">New Form</button>
@@ -81,26 +117,7 @@
         <!--Submitted Form-->
         <div [hidden]="!submitted">
           <h2>You submitted the following:</h2>
-          <div class="row">
-            <div class="col-xs-3">Name:</div>
-            <div class="col-xs-9  pull-right">{{ model.name }}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">Email:</div>
-            <div class="col-xs-9 pull-right">{{ model.email }}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">Phone number:</div>
-            <div class="col-xs-9 pull-right">{{ model.mobile }}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">Zip Code:</div>
-            <div class="col-xs-9 pull-right">{{ model.zipcode }}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">Housing Type:</div>
-            <div class="col-xs-9 pull-right">{{ model.housing }}</div>
-          </div>
+          <p style="word-wrap: break-word;">{{diagnostic()}}</p>
           <br>
           <button class="btn btn-primary" (click)="submitted=false">Edit</button>
         </div>

@@ -4,8 +4,15 @@ export class FormTemplate{
         public email: string,
         public mobile: string,
         public zipcode: number,
-        public housing: string,
+        public singleFamily: boolean,
+        public multiFamily: boolean,
         public startDate: Date,
-        public endDate: Date
+        public endDate: Date,
+        public married: boolean,
+        public single: boolean,
+        public unknownStatus: boolean,
+        public male: boolean,
+        public female: boolean,
+        public unknownGender: boolean
     ) {}
 }

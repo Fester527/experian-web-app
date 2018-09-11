@@ -8,12 +8,14 @@ import { FormTemplate } from '../custom-form-template';
 })
 export class CustomFormComponent implements OnInit {
 
+  maritalStatuses: string[] = ['Married', 'Single', 'Unknown'];
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  model = new FormTemplate('Ness Earthbound', 'snes@nintendo.com', '18885552727', 30605, 'Single Family', null, null);
+  model = new FormTemplate('Ness Earthbound', 'snes@nintendo.com', '12345678900', 30605, false, false, null, null, false, false, false, false, false, false);
 
   submitted = false;
 
@@ -23,9 +25,9 @@ export class CustomFormComponent implements OnInit {
   }
 
   newForm() {
-    this.model = new FormTemplate('','','', null, '', null, null);
+    this.model = new FormTemplate('','','', null, false, false, null, null, false, false, false, false, false, false);
   }
 
-  get diagnostic() { return JSON.stringify(this.model) }
+  diagnostic() { return JSON.stringify(this.model) }
 
 }

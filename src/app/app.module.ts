@@ -5,7 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LoadingModule } from 'ngx-loading';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatNativeDateModule } from '@angular/material';
+import { MatButtonModule, 
+        MatCheckboxModule, 
+        MatNativeDateModule, 
+        MatExpansionModule,
+        MatRadioModule
+       } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
@@ -44,7 +49,9 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
