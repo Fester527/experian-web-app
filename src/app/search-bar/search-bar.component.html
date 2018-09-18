@@ -1,7 +1,14 @@
 <div id="search-component" style="text-align:center">
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
-  <input myNumberOnly #searchBox id="search-box" [(ngModel)]="code" placeholder="Enter a zip code." (keydown)="enterSearch($event, code)"/>
-  <button mat-raised-button (click)="getZipCodeData(code)" style="height: 35px; margin-left: 10px;">Search</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 offset-sm-4">
+        <input myNumberOnly class="float-left" #searchBox id="search-box" [(ngModel)]="code" placeholder="Enter a zip code" (keydown)="enterSearch($event, code)"/>
+        <button mat-raised-button class="float-right" (click)="getZipCodeData(code)">Search</button>
+      </div>
+    </div>
+  </div>
+  
 </div>
 <hr>
 <app-custom-form></app-custom-form>

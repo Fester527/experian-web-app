@@ -48,7 +48,7 @@
                         <mat-checkbox class="example-margin" type="checkbox" id="singleFamily" name="singleFamily" value="true" [(ngModel)]="model.singleFamily" #singleFamily="ngModel">Single Famiy</mat-checkbox>
                         <mat-checkbox class="example-margin" type="checkbox" id="multiFamily" name="multiFamily" value="true" [(ngModel)]="model.multiFamily" #multiFamily="ngModel">Multi Family</mat-checkbox>
                       </section>
-                      </fieldset>
+                    </fieldset>
 
                     <hr>
 
@@ -60,7 +60,7 @@
                           <mat-form-field>
                             <input matInput [max]="today" [matDatepicker]="picker1" placeholder="Choose a start date" class="form-control date" name="start" id="start" [(ngModel)]="model.startDate" #start="ngModel" required>
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-datepicker touchUi #picker1></mat-datepicker>
                           </mat-form-field>
                         </div>
                       </div>
@@ -70,7 +70,7 @@
                           <mat-form-field>
                             <input matInput [min]="model.startDate" [max]="today" [matDatepicker]="picker2" placeholder="Choose an end date" class="form-control" name="end" id="end" [(ngModel)]="model.endDate" #end="ngModel" required>
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-datepicker touchUi #picker2></mat-datepicker>
                           </mat-form-field>
                         </div>
                       </div>
@@ -195,16 +195,56 @@
                     <br>
 
                     <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
-                    <button type="button" class="btn btn-default" (click)="newForm(); myForm.reset()">New Form</button>
+                    <button type="button" class="btn btn-default" (click)="newForm();">New Form</button>
                   </form>
                 </div>
 
                 <!--Submitted Section-->
                 <div [hidden]="!submitted">
-                  <h2>You submitted the following:</h2>
-                  <p style="word-wrap: break-word;">{{diagnostic()}}</p>
+                  <h4>Please confirm the information provided.</h4>
+                  <br>
+                  <mat-card>
+                    <h6>Zip code:</h6>
+                      <p>{{model.zipcode}}</p>
+                    <h6>Housing type:</h6>
+                      <p *ngIf="model.singleFamily">Single Family</p>
+                      <p *ngIf="model.multiFamily">Multi Family</p>
+                    <h6>Date Range:</h6>
+                      <p> {{model.startDate | date}} </p>
+                      <p> {{model.endDate | date}} </p>
+                    <h6>Marital Status(es):</h6>
+                      <p *ngIf="model.married">Married</p>
+                      <p *ngIf="model.single">Single</p>
+                      <p *ngIf="model.unknownStatus">Unknown</p>
+                    <h6>Gender(s):</h6>
+                      <p *ngIf="model.male">Male</p>
+                      <p *ngIf="model.female">Female</p>
+                      <p *ngIf="model.unknownGender">Unknown</p>
+                    <h6>Age Range(s):</h6>
+                      <p *ngIf="model.age[0]">20 - 29 years old</p>
+                      <p *ngIf="model.age[1]">30 - 39 years old</p>
+                      <p *ngIf="model.age[2]">40 - 49 years old</p>
+                      <p *ngIf="model.age[3]">50 - 59 years old</p>
+                      <p *ngIf="model.age[4]">60+ years old</p>
+                    <h6>Income Range(s):</h6>
+                      <p *ngIf="model.income[0]">$1,0000 - $14,999</p>
+                      <p *ngIf="model.income[1]">$15,000 - $24,999</p>
+                      <p *ngIf="model.income[2]">$25,000 - $34,999</p>
+                      <p *ngIf="model.income[3]">35,000 - $49,999</p>
+                      <p *ngIf="model.income[4]">$50,000 - $74,999</p>
+                      <p *ngIf="model.income[5]">$75,000 - $99,999</p>
+                      <p *ngIf="model.income[6]">$100,000 - $124,999</p>
+                      <p *ngIf="model.income[7]">$125,000 - $149,999</p>
+                      <p *ngIf="model.income[8]">$150,000 - $174,999</p>
+                      <p *ngIf="model.income[9]">$175,000 - $199,999</p>
+                      <p *ngIf="model.income[10]">$200,000 - $249,999</p>
+                      <p *ngIf="model.income[11]">$250,000+</p>
+                      <p *ngIf="model.income[12]">Unknown</p>
+                  </mat-card>
                   <br>
                   <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+                  <br>
+                  <code>{{diagnostic()}}</code>
                 </div>
 
               </div>

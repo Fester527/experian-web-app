@@ -14,7 +14,7 @@ export class CustomFormComponent implements OnInit {
   start: Date = new Date('2018-09-01T04:00:00.000Z');
   endDefault: Date;
   today: Date = new Date();
-  end: Date = new Date('2018-09-30T04:00:00.000Z');
+  end: Date = new Date('2018-09-15T04:00:00.000Z');
   incomeDefault: boolean[] = [false, false, false, false, false, false, false, false, false, false, false, false, false];
   ageDefault: boolean[] = [false, false, false, false, false];
   income: boolean[] = [false, false, false, false, false, true, false, false, false, false, false, false, false];
@@ -23,7 +23,6 @@ export class CustomFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.newForm();
   }
 
   model = new FormTemplate(30605, true, false, this.start, this.end, false, true, false, true, false, false, this.income, this.age);

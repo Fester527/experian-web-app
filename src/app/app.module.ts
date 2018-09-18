@@ -12,6 +12,7 @@ import { MatButtonModule, MatCheckboxModule, MatNativeDateModule, MatRadioModule
 import { MatExpansionModule } from '@angular/material/expansion'; //material design import
 import { MatDatepickerModule } from '@angular/material/datepicker'; //material design import
 import { MatFormFieldModule } from '@angular/material/form-field'; //material design import
+import { MatCardModule } from '@angular/material/card';
 
 //Components
 import { AppComponent } from './app.component';
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatExpansionModule,
     MatRadioModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
