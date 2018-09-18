@@ -1,9 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-10 offset-lg-1">
+    <div class="col-lg-12">
 
+      <!--Start of Expansion-->
       <mat-accordion>
         <mat-expansion-panel>
+          
+          <!--Expansion Header-->
           <mat-expansion-panel-header>
             <mat-panel-title>
               Custom Form
@@ -13,38 +16,27 @@
           <!--Content of expansion.-->
           <div class="container">
             <div class="row">
-              <div class="col-md-10 offset-md-1">
+              <div class="col-md-12">
                 <div [hidden]="submitted">
                   <h6>Below you can choose the options you would like for your custom report.</h6>
-                  <hr>
+                  <br>
                   <form (ngSubmit)="onSubmit()" #myForm="ngForm">
-
-                    <!--Name-->
-                    <!-- <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
-                      <div [hidden]="name.valid || name.pristine" class="alert alert-danger"> Name is required </div>
-                    </div> -->
-
-                    <!--Email-->
-                    <!-- <div class="form-group">
-                      <label for="email">Email</label>
-                      <input type="text" class="form-control" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel">
-                      <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required </div>
-                    </div> -->
-
-                    <!--Phone-->
-                    <!-- <div class="form-group">
-                      <label for="mobile">Phone Number</label>
-                      <input type="tel" class="form-control" id="mobile" required [(ngModel)]="model.mobile" name="mobile" #mobile="ngModel">
-                      <div [hidden]="mobile.valid || mobile.pristine" class="alert alert-danger"> Phone number is required </div>
-                    </div> -->
 
                     <!--Zip Code-->
                     <div class="form-group">
                       <label for="zipcode">Zip Code</label>
-                      <input type="number" class="form-control" id="zipcode"  [(ngModel)]="model.zipcode" name="zipcode" #zipcode="ngModel" required>
-                      <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger"> Zip code is required </div>
+                      <input id="zipcode" name="zipcode" class="form-control zip" required minlength="5" pattern="[0-9]{5}" [(ngModel)]="model.zipcode" #zipcode="ngModel">
+                      <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" class="alert alert-danger">
+                          <div *ngIf="zipcode.errors.required">
+                            Zip code is required.
+                          </div>
+                          <div *ngIf="zipcode.errors.minlength">
+                            Zip code must be 5 numbers.
+                          </div>
+                          <div *ngIf="zipcode.errors.pattern">
+                            The zip code must only contain numbers.
+                          </div>
+                      </div>
                     </div>
 
                     <hr>
@@ -52,187 +44,154 @@
                     <!--Housing Type-->
                     <fieldset>
                       <legend>Select the housing types that apply:</legend>
-
-                      <div>
-                        <input type="checkbox" id="singleFamily" name="singleFamily" value="true" [(ngModel)]="model.singleFamily" #singleFamily="ngModel"/>
-                        <label for="singleFamily">Single Family</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="multiFamily" name="multiFamily" value="true" [(ngModel)]="model.multiFamily" #multiFamily="ngModel"/>
-                        <label for="multiFamily">Multi Family</label>
-                      </div>
-                    </fieldset>
+                      <section class="example-section">
+                        <mat-checkbox class="example-margin" type="checkbox" id="singleFamily" name="singleFamily" value="true" [(ngModel)]="model.singleFamily" #singleFamily="ngModel">Single Famiy</mat-checkbox>
+                        <mat-checkbox class="example-margin" type="checkbox" id="multiFamily" name="multiFamily" value="true" [(ngModel)]="model.multiFamily" #multiFamily="ngModel">Multi Family</mat-checkbox>
+                      </section>
+                      </fieldset>
 
                     <hr>
 
-                    <!--Start Date Selection-->
-                    <div class="form-group">
-                      <mat-form-field class="example-full-width">
-                        <input matInput [matDatepicker]="picker1" placeholder="Choose a start date" class="form-control" name="start" id="start" [(ngModel)]="model.startDate" #start="ngModel" required>
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi #picker1></mat-datepicker>
-                      </mat-form-field>
+                    <legend>Select the date range for your data.</legend>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <!--Start Date Selection-->
+                        <div class="form-group">
+                          <mat-form-field>
+                            <input matInput [max]="today" [matDatepicker]="picker1" placeholder="Choose a start date" class="form-control date" name="start" id="start" [(ngModel)]="model.startDate" #start="ngModel" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <!--End Date Selection-->
+                        <div class="form-group">
+                          <mat-form-field>
+                            <input matInput [min]="model.startDate" [max]="today" [matDatepicker]="picker2" placeholder="Choose an end date" class="form-control" name="end" id="end" [(ngModel)]="model.endDate" #end="ngModel" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+ 
+                    <hr>
+
+                    <!--Split Section-->
+                    <div class="row">
+                      <!--Left Column-->
+                      <div class="col-md-6">
+                        <!--Marital Status-->
+                        <fieldset>
+                          <legend>Select the marital statuses that apply:</legend>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="married" name="married" value="true" [(ngModel)]="model.married" #married="ngModel">Married</mat-checkbox>
+                            <mat-checkbox class="example-margin" type="checkbox" id="single" name="single" value="true" [(ngModel)]="model.single" #single="ngModel">Single</mat-checkbox>
+                            <mat-checkbox class="example-margin" type="checkbox" id="unknownStatus" name="unknownStatus" value="true" [(ngModel)]="model.unknownStatus" #unknownStatus="ngModel">Unknown</mat-checkbox>
+                          </section>
+                        </fieldset>
+
+                        <hr>
+
+                        <!--Gender-->
+                        <fieldset>
+                          <legend>Select the genders that apply:</legend>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="male" name="male" value="true" [(ngModel)]="model.male" #male="ngModel">Male</mat-checkbox>
+                            <mat-checkbox class="example-margin" type="checkbox" id="female" name="female" value="true" [(ngModel)]="model.female" #female="ngModel">Female</mat-checkbox>
+                            <mat-checkbox class="example-margin" type="checkbox" id="unknownGender" name="unknownGender" value="true" [(ngModel)]="model.unknownGender" #unknownGender="ngModel">Unknown</mat-checkbox>
+                          </section>
+                        </fieldset>
+
+                        <hr>
+
+                        <!--Age Ranges-->
+                        <fieldset>
+                          <legend>Select the age ranges that apply:</legend>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="age1" name="age1" value="true" [(ngModel)]="model.age[0]" #age1="ngModel">20 - 29 years old</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="age2" name="age2" value="true" [(ngModel)]="model.age[1]" #age2="ngModel">30 - 39 years old</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="age3" name="age3" value="true" [(ngModel)]="model.age[2]" #age3="ngModel">40 - 49 years old</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="age4" name="age4" value="true" [(ngModel)]="model.age[3]" #age4="ngModel">50 - 59 years old</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="age5" name="age5" value="true" [(ngModel)]="model.age[4]" #age5="ngModel">60+ years old</mat-checkbox>
+                          </section>
+                        </fieldset>
+                      </div>
+                      <!--Right Column-->
+                      <div class="col-md-6">
+                        <!--Income-->
+                        <fieldset>
+                          <legend>Select the income ranges that apply:</legend>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income1" name="income1" value="true" [(ngModel)]="model.income[0]" #income1="ngModel">$1,0000 - $14,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income2" name="income2" value="true" [(ngModel)]="model.income[1]" #income2="ngModel">$15,000 - $24,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income3" name="income3" value="true" [(ngModel)]="model.income[2]" #income3="ngModel">$25,000 - $34,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income4" name="income4" value="true" [(ngModel)]="model.income[3]" #income4="ngModel">35,000 - $49,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income5" name="income5" value="true" [(ngModel)]="model.income[4]" #income5="ngModel">$50,000 - $74,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin"ut type="checkbox" id="income6" name="income6" value="true" [(ngModel)]="model.income[5]" #income6="ngModel">$75,000 - $99,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income7" name="income7" value="true" [(ngModel)]="model.income[6]" #income7="ngModel">$100,000 - $124,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income8" name="income8" value="true" [(ngModel)]="model.income[7]" #income8="ngModel">$125,000 - $149,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income9" name="income9" value="true" [(ngModel)]="model.income[8]" #income9="ngModel">$150,000 - $174,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income10" name="income10" value="true" [(ngModel)]="model.income[9]" #income10="ngModel">$175,000 - $199,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income11" name="income11" value="true" [(ngModel)]="model.income[10]" #income11="ngModel">$200,000 - $249,999</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income12" name="income12" value="true" [(ngModel)]="model.income[11]" #income12="ngModel">$250,000+</mat-checkbox>
+                          </section>
+
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" type="checkbox" id="income13" name="income13" value="true" [(ngModel)]="model.income[12]" #income13="ngModel">Unknown</mat-checkbox>
+                          </section>
+                        </fieldset>
+                      </div>
                     </div>
 
-                    <!--End Date Selection-->
-                    <div class="form-group">
-                      <mat-form-field class="example-full-width">
-                        <input matInput [matDatepicker]="picker2" placeholder="Choose an end date" class="form-control" name="end" id="end" [(ngModel)]="model.endDate" #end="ngModel" required>
-                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi #picker2></mat-datepicker>
-                      </mat-form-field>
-                    </div>
-
-                    <hr>
-
-                    <!--Marital Status-->
-                    <fieldset>
-                      <legend>Select the marital statuses that apply:</legend>
-
-                      <div>
-                        <input type="checkbox" id="married" name="married" value="true" [(ngModel)]="model.married" #married="ngModel"/>
-                        <label for="singleFamily">Married</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="single" name="single" value="true" [(ngModel)]="model.single" #single="ngModel"/>
-                        <label for="multiFamily">Single</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="unknownStatus" name="unknownStatus" value="true" [(ngModel)]="model.unknownStatus" #unknownStatus="ngModel"/>
-                        <label for="multiFamily">Unknown</label>
-                      </div>
-                    </fieldset>
-
-                    <hr>
-
-                    <!--Gender-->
-                    <fieldset>
-                      <legend>Select the genders that apply:</legend>
-
-                      <div>
-                        <input type="checkbox" id="male" name="male" value="true" [(ngModel)]="model.male" #male="ngModel"/>
-                        <label for="singleFamily">Male</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="female" name="female" value="true" [(ngModel)]="model.female" #female="ngModel"/>
-                        <label for="multiFamily">Female</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="unknownGender" name="unknownGender" value="true" [(ngModel)]="model.unknownGender" #unknownGender="ngModel"/>
-                        <label for="multiFamily">Unknown</label>
-                      </div>
-                    </fieldset>
-
-                    <hr>
-
-                    <!--Income-->
-                    <fieldset>
-                      <legend>Select the income ranges that apply:</legend>
-
-                      <div>
-                        <input type="checkbox" id="income1" name="income1" value="true" [(ngModel)]="model.income[0]" #income1="ngModel"/>
-                        <label for="income1">$1,0000 - $14,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income2" name="income2" value="true" [(ngModel)]="model.income[1]" #income2="ngModel"/>
-                        <label for="income2">$15,000 - $24,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income3" name="income3" value="true" [(ngModel)]="model.income[2]" #income3="ngModel"/>
-                        <label for="income3">$25,000 - $34,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income4" name="income4" value="true" [(ngModel)]="model.income[3]" #income4="ngModel"/>
-                        <label for="income4">$35,000 - $49,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income5" name="income5" value="true" [(ngModel)]="model.income[4]" #income5="ngModel"/>
-                        <label for="income5">$50,000 - $74,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income6" name="income6" value="true" [(ngModel)]="model.income[5]" #income6="ngModel"/>
-                        <label for="income6">$75,000 - $99,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income7" name="income7" value="true" [(ngModel)]="model.income[6]" #income7="ngModel"/>
-                        <label for="income7">$100,000 - $124,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income8" name="income8" value="true" [(ngModel)]="model.income[7]" #income8="ngModel"/>
-                        <label for="income8">$125,000 - $149,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income9" name="income9" value="true" [(ngModel)]="model.income[8]" #income9="ngModel"/>
-                        <label for="income9">$150,000 - $174,999</label>
-                      </div>
-
-
-                      <div>
-                        <input type="checkbox" id="income10" name="income10" value="true" [(ngModel)]="model.income[9]" #income10="ngModel"/>
-                        <label for="income10">$175,000 - $199,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income11" name="income11" value="true" [(ngModel)]="model.income[10]" #income11="ngModel"/>
-                        <label for="income11">$200,000 - $249,999</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income12" name="income12" value="true" [(ngModel)]="model.income[11]" #income12="ngModel"/>
-                        <label for="income12">$250,000+</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="income13" name="income13" value="true" [(ngModel)]="model.income[12]" #income13="ngModel"/>
-                        <label for="income13">Unknown</label>
-                      </div>
-                    </fieldset>
-
-                    <hr>
-
-                    <!--Age Ranges-->
-                    <fieldset>
-                      <legend>Select the age ranges that apply:</legend>
-
-                      <div>
-                        <input type="checkbox" id="age1" name="age1" value="true" [(ngModel)]="model.age[0]" #age1="ngModel"/>
-                        <label for="age1">20 - 29 years old</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="age2" name="age2" value="true" [(ngModel)]="model.age[1]" #age2="ngModel"/>
-                        <label for="age2">30 - 39 years old</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="age3" name="age3" value="true" [(ngModel)]="model.age[2]" #age3="ngModel"/>
-                        <label for="age3">40 - 49 years old</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="age4" name="age4" value="true" [(ngModel)]="model.age[3]" #age4="ngModel"/>
-                        <label for="age4">50 - 59 years old</label>
-                      </div>
-
-                      <div>
-                        <input type="checkbox" id="age5" name="age5" value="true" [(ngModel)]="model.age[4]" #age5="ngModel"/>
-                        <label for="age5">60+ years old</label>
-                      </div>
-                    </fieldset>
-                    
                     <br>
 
                     <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
@@ -240,15 +199,18 @@
                   </form>
                 </div>
 
+                <!--Submitted Section-->
                 <div [hidden]="!submitted">
                   <h2>You submitted the following:</h2>
                   <p style="word-wrap: break-word;">{{diagnostic()}}</p>
                   <br>
                   <button class="btn btn-primary" (click)="submitted=false">Edit</button>
                 </div>
+
               </div>
             </div>
           </div>
+
         </mat-expansion-panel>
       </mat-accordion>
 

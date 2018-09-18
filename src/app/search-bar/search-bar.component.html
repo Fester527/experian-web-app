@@ -1,5 +1,5 @@
 <div id="search-component" style="text-align:center">
-  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }"></ngx-loading>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
   <input myNumberOnly #searchBox id="search-box" [(ngModel)]="code" placeholder="Enter a zip code." (keydown)="enterSearch($event, code)"/>
   <button mat-raised-button (click)="getZipCodeData(code)" style="height: 35px; margin-left: 10px;">Search</button>
 </div>

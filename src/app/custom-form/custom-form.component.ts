@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, Form } from '@angular/forms';
 import { FormTemplate } from '../custom-form-template';
 
 @Component({
@@ -13,21 +13,21 @@ export class CustomFormComponent implements OnInit {
   startDefault: Date;
   start: Date = new Date('2018-09-01T04:00:00.000Z');
   endDefault: Date;
+  today: Date = new Date();
   end: Date = new Date('2018-09-30T04:00:00.000Z');
   incomeDefault: boolean[] = [false, false, false, false, false, false, false, false, false, false, false, false, false];
   ageDefault: boolean[] = [false, false, false, false, false];
   income: boolean[] = [false, false, false, false, false, true, false, false, false, false, false, false, false];
   age: boolean[] = [true, false, false, false, false];
 
-  
-
   constructor() { }
 
   ngOnInit() {
+    this.newForm();
   }
 
-  //model = new FormTemplate('Ness Earthbound', 'snes@nintendo.com', '12345678900', 30605, true, false, this.start, this.end, false, true, false, true, false, false, this.income, this.age);
-  model = new FormTemplate('','','', null, false, false, this.startDefault, this.endDefault, false, false, false, false, false, false, this.incomeDefault, this.ageDefault);
+  model = new FormTemplate(30605, true, false, this.start, this.end, false, true, false, true, false, false, this.income, this.age);
+  //model = new FormTemplate(null, false, false, this.startDefault, this.endDefault, false, false, false, false, false, false, this.incomeDefault, this.ageDefault);
   submitted = false;
 
   onSubmit() { 
@@ -36,7 +36,7 @@ export class CustomFormComponent implements OnInit {
   }
 
   newForm() {
-    this.model = new FormTemplate('','','', null, false, false, this.startDefault, this.endDefault, false, false, false, false, false, false, this.incomeDefault, this.ageDefault);
+    this.model = new FormTemplate(null, false, false, this.startDefault, this.endDefault, false, false, false, false, false, false, this.incomeDefault, this.ageDefault);
   }
 
   diagnostic() { return JSON.stringify(this.model) }

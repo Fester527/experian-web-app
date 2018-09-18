@@ -10,8 +10,12 @@ export class ZipCodeDataService {
 
   constructor(private http: HttpClient) { }
 
-  private zipCodeSearchUrl = 'https://experian-api.herokuapp.com/search';
+  
+  private zipCodeSearchUrl = 'https://experian-api.herokuapp.com/search'; //API url to seach for a zipcode
 
+  /**
+   * Function to retrieve zip code data from API. Returns response as an array of strings (JSON).
+   */
   getZipCodeData (code: string): Observable<String[]> {
     const url = `${this.zipCodeSearchUrl}/${code}`;
     return this.http.get<String[]>(url)
@@ -21,6 +25,9 @@ export class ZipCodeDataService {
     );
   }
 
+  /**
+   * Handles any errors that may occur during the HTTP call in the function getZipCodeData();
+   */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
